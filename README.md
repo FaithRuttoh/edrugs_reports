@@ -6,8 +6,11 @@ A Flutter-based application designed to enhance medication safety in healthcare 
 
 Features
 User Authentication: Enables secure access with Firebase Authentication (email/password login).
+
 Error Reporting Form: Allows healthcare staff to submit detailed medication error reports, including error type, description, and severity.
+
 Admin Dashboard: Displays submitted reports with a real-time data stream and basic data filtering for review.
+
 Data Visualization (Future Enhancement): Visualizes trends in reported medication errors to highlight key areas for improvement.
 
 Technologies Used
@@ -19,7 +22,9 @@ Authentication: Firebase Authentication
 Data Visualization: fl_chart library (for future enhancement)
 
 Getting Started
+
 Prerequisites
+
 Flutter SDK
 Firebase Account
 Firebase project with Firestore and Authentication set up
@@ -29,13 +34,13 @@ Installation
 Clone the Repository
 
 bash
-Copy code
+
 git clone https://github.com/FaithRuttoh/edrug_metrix.git
 cd edrug_metrix
 
 Install Dependencies
 bash
-Copy code
+
 flutter pub get
 Configure Firebase
 
@@ -46,16 +51,22 @@ Follow the Firebase setup guide for Flutter integration.
 Run the App
 
 bash
-Copy code
 flutter run
 
 Project Structure
+
 bash
-Copy code
+
+
+
 lib/
+
 ├── main.dart                 # Main application file, initializes Firebase
+
 ├── authentication_screen.dart # User authentication (login and registration)
+
 ├── error_report_form.dart     # Error reporting form for submitting incidents
+
 └── admin_dashboard.dart       # Admin dashboard for viewing submitted reports
 
 Usage
@@ -69,16 +80,20 @@ Admin Dashboard:
 Admins view all submitted reports in real-time, including the ability to filter by error type and severity.
 
 Data visualization (future enhancement) allows for trend analysis.
+
 Code Snippets
+
 Authentication Example
+
 dart
-Copy code
+
+
 final _auth = FirebaseAuth.instance;
 await _auth.signInWithEmailAndPassword(email: email, password: password);
 Firestore Data Submission
 
 dart
-Copy code
+
 FirebaseFirestore.instance.collection('error_reports').add({
   'errorType': errorType,
   'description': description,
@@ -88,7 +103,7 @@ FirebaseFirestore.instance.collection('error_reports').add({
 Real-Time Data Retrieval
 
 dart
-Copy code
+
 StreamBuilder(
   stream: FirebaseFirestore.instance.collection('error_reports').snapshots(),
   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -101,8 +116,5 @@ Data Visualization: Use fl_chart to create pie and bar charts to analyze trends 
 Push Notifications: Notify admins about high-severity errors for immediate review.
 Role-Based Access Control: Limit certain features to admins to ensure data security.
 
-License
-This project is open source and available under the MIT License.
 
-Contact
 For any inquiries or suggestions, please contact [fay.ruttoh@gmail.com/+254718747695].
