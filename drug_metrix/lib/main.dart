@@ -1,121 +1,71 @@
-import 'package:drug_metrix/pages/precaution.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-// Importing the pages for login, register, and homepage functionality.
+// Importing pages for the app.
 import 'package:drug_metrix/pages/login.dart';
-import 'package:drug_metrix/pages/register.dart';
 import 'package:drug_metrix/pages/homepage.dart';
-import 'package:drug_metrix/pages/myincident.dart';
+import 'package:drug_metrix/pages/errorreport.dart';
+import 'package:drug_metrix/pages/precaution.dart';
 
-// The main function is the entry point of the app.
-// It calls the runApp() method to start the drug_metrixApp.
-void main() {
-  runApp(drug_metrixApp()); // Starts the drug_metrixApp widget.
+void main() async { 
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const DrugMetrixApp());
 }
 
-// PocketBankingApp class, which is a StatelessWidget.
-// This defines the overall structure and theme of the app.
-class drug_metrixApp extends StatelessWidget {
-  const drug_metrixApp({super.key});
+// Main app class
+class DrugMetrixApp extends StatelessWidget {
+  const DrugMetrixApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // MaterialApp is the root widget of the app.
     return MaterialApp(
-      title:
-          'Medication Error Reporting', // Title of the app displayed in the task manager.
-
-      // Defining the theme for the app.
+      title: 'Medication Error Reporting',
       theme: ThemeData(
-        primaryColor:
-            Colors.green, // Setting green as the primary color for the app.
-
-        // Defining a color scheme with green as the primary swatch.
+        primaryColor: Colors.green,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.green, // Using a green color scheme.
+          primarySwatch: Colors.green,
         ).copyWith(
-          secondary:
-              Colors.greenAccent, // Setting geenAccent as the secondary color.
+          secondary: Colors.greenAccent,
         ),
-
-        // Defining text themes for various parts of the app.
         textTheme: const TextTheme(
           headlineMedium: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              color: Colors.green), // Styling for large headlines.
-          bodyMedium: TextStyle(
-              fontSize: 18, color: Colors.black), // Styling for body text.
+              fontSize: 26, fontWeight: FontWeight.bold, color: Colors.green),
+          bodyMedium: TextStyle(fontSize: 18, color: Colors.black),
         ),
-
-        // Defining the default button style for older buttons.
         buttonTheme: const ButtonThemeData(
-          buttonColor: Colors.green, // Teal color for buttons.
-          textTheme: ButtonTextTheme
-              .primary, // Ensures that button text color is suitable for the button background.
+          buttonColor: Colors.green,
+          textTheme: ButtonTextTheme.primary,
         ),
-
-        // Styling for modern ElevatedButtons.
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors
-                .green, // Setting green as the background color for ElevatedButtons.
-          ),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
         ),
       ),
-
-      // Defining the dark theme for the app.
       darkTheme: ThemeData.dark().copyWith(
-        primaryColor: Colors.green, // green as the primary color for dark mode.
-
-        // Defining a color scheme for dark mode.
+        primaryColor: Colors.green,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch:
-              Colors.green, // Using green as the main color in dark mode.
+          primarySwatch: Colors.green,
         ).copyWith(
-          secondary: Colors
-              .greenAccent, // green Accent as the secondary color in dark mode.
+          secondary: Colors.greenAccent,
         ),
-
-        // Defining text themes for dark mode.
         textTheme: const TextTheme(
           headlineMedium: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              color: Colors.greenAccent), // Styling for headlines in dark mode.
-          bodyMedium: TextStyle(
-              fontSize: 18,
-              color: Colors.white), // Styling for body text in dark mode.
+              fontSize: 26, fontWeight: FontWeight.bold, color: Colors.greenAccent),
+          bodyMedium: TextStyle(fontSize: 18, color: Colors.white),
         ),
-
-        // Styling for ElevatedButtons in dark mode.
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor:
-                Colors.green, // Teal background for buttons in dark mode.
-          ),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
         ),
       ),
-
-      // Setting the app to automatically switch between light and dark mode based on the system settings.
-      themeMode: ThemeMode.system, // System-defined theme mode (light/dark).
-
-      // Defining the initial route of the app, which is the login page.
-      initialRoute: '/',
-
-      // Defining the routes for navigation between different pages.
+      themeMode: ThemeMode.system,
+      initialRoute: '/login',
       routes: {
-        '/': (context) => const LoginPage(), // Root route loads the LoginPage.
-        '/register': (context) =>
-            const RegisterPage(), // '/register' route loads the RegisterPage.
-        '/homepage': (context) =>
-            const Homepage(),
-           // '/dashboard' route loads the HomePage.
-      '/myincidentPage':(context)=>
-            MyIncidentPage(),
-       '/precaution.page':(context)=>const PrecautionPage(),
-
-      }
+        '/login': (context) => const AuthenticationScreen(),
+  // Other routes...
+        '/homepage': (context) => const AdminDashboard(), // Admin dashboard route
+        '/errorreportpage': (context) => const ErrorReportForm(), // Error report page route
+        '/precaution.page': (context) => const PrecautionPage(), // Precaution page route
+      },
     );
   }
 }

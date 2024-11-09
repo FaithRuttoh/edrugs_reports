@@ -28,7 +28,7 @@ class PrecautionPage extends StatelessWidget {
 
   // A helper function that builds individual homepage items.
   // Takes the context, icon, label, and route for navigation.
-  Widget _buildDashboardItem(
+  Widget buildDashboardItem(
       BuildContext context, IconData icon, String label, String route) {
     // GestureDetector allows detecting taps on the card.
     return GestureDetector(
